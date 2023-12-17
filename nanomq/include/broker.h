@@ -80,6 +80,9 @@ static int broker_start_rc;
 
 typedef struct client_ctx client_ctx;
 
+extern void broker_set_sub_cb(void (*cb)(const char* topic));
+extern void broker_set_unsub_cb(void (*cb)(const char* topic));
+
 extern int  broker_start(int argc, char **argv);
 extern int  broker_stop(int argc, char **argv);
 extern int  broker_restart(int argc, char **argv);

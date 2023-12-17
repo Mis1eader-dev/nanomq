@@ -275,6 +275,8 @@ bridge_handler(nano_work *work)
 	return rv;
 }
 
+extern void (*sub_cb)(const char* topic);
+
 void
 server_cb(void *arg)
 {
@@ -411,8 +413,7 @@ server_cb(void *arg)
 			if (0 != (rv = encode_suback_msg(smsg, work)))
 				log_error("error in encode suback: [%d]", rv);
 
-			// TODO: Callback: cb(work->sub_pkt->node->topic.body);
-			printf("Subscribed to '%s'\n", work->sub_pkt->node->topic.body);
+			sub_cb(work->sub_pkt->node->topic.body);
 
 			sub_pkt_free(work->sub_pkt);
 			// handle retain (Retain flag handled in npipe)
@@ -1738,6 +1739,21 @@ broker_parse_opts(int argc, char **argv, conf *config)
 	}
 
 	return rv == -1;
+}
+
+void (*sub_cb)(const char* topic);
+void (*unsub_cb)(const char* topic);
+
+void
+broker_set_sub_cb(void (*cb)(const char* topic))
+{
+	sub_cb = cb;
+}
+
+void
+broker_set_unsub_cb(void (*cb)(const char* topic))
+{
+	unsub_cb = cb;
 }
 
 int

@@ -403,13 +403,14 @@ sub_ctx_del(void *db, char *topic, uint32_t pid)
 	return 0;
 }
 
+extern void (*unsub_cb)(const char* topic);
+
 static void *
 destroy_sub_client_cb(void *args, char *topic)
 {
 	sub_destroy_info *des = (sub_destroy_info *) args;
 
-	// TODO: Callback: cb(topic);
-	printf("Unsubscribed from '%s'\n", topic);
+	unsub_cb(topic);
 
 	dbtree_delete_client(des->db, topic, des->pid);
 
