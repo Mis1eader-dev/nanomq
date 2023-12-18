@@ -275,7 +275,8 @@ bridge_handler(nano_work *work)
 	return rv;
 }
 
-extern void (*sub_cb)(const char* topic);
+void (*sub_cb)(const char* topic);
+void (*unsub_cb)(const char* topic);
 
 void
 server_cb(void *arg)
@@ -1740,9 +1741,6 @@ broker_parse_opts(int argc, char **argv, conf *config)
 
 	return rv == -1;
 }
-
-void (*sub_cb)(const char* topic);
-void (*unsub_cb)(const char* topic);
 
 void
 broker_set_sub_cb(void (*cb)(const char* topic))

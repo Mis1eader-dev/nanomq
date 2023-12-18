@@ -21,9 +21,6 @@ endif(DEBUG AND TSAN)
 
 aux_source_directory(. DIRSRCS)
 
-include_directories(./)
-include_directories(${CMAKE_SOURCE_DIR}/nanomq/include)
-include_directories(${CMAKE_SOURCE_DIR}/nng/include/nng)
 if(ENABLE_JWT)
   include_directories(${CMAKE_SOURCE_DIR}/extern/l8w8jwt/include)
 endif(ENABLE_JWT)
@@ -68,6 +65,12 @@ elseif (BUILD_SHARED_LIBS)
 else()
   add_executable(nanomq ${SOURCES})
 endif()
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
+	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+	$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../nng/include/nng>
+)
 
 if(ENABLE_MYSQL)
 
