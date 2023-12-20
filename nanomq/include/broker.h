@@ -86,7 +86,7 @@ extern void broker_set_unsub_cb2(void (*cb)());
 
 extern int  broker_start(int argc, char **argv, bool hold);
 extern int  broker_stop(int argc, char **argv);
-extern int  broker_restart(int argc, char **argv);
+extern int  broker_restart(int argc, char **argv, bool hold);
 extern int  broker_reload(int argc, char **argv);
 extern int  broker_dflt(int argc, char **argv);
 extern void bridge_send_cb(void *arg);

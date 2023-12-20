@@ -2004,7 +2004,7 @@ broker_reload(int argc, char **argv)
 }
 
 int
-broker_restart(int argc, char **argv)
+broker_restart(int argc, char **argv, bool hold)
 {
 	int pid = 0;
 
@@ -2018,7 +2018,7 @@ broker_restart(int argc, char **argv)
 		fprintf(stderr, "There is no running NanoMQ instance.\n");
 	}
 
-	return broker_start(argc, argv);
+	return broker_start(argc, argv, hold);
 }
 
 #else

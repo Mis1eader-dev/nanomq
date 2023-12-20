@@ -143,7 +143,7 @@ main(int argc, char **argv)
 	} else if (strcmp(argv[1], "stop") == 0) {
 		return broker_stop(argc, argv);
 	} else if (strcmp(argv[1], "restart") == 0) {
-		return broker_restart(argc, argv);
+		return broker_restart(argc, argv, true);
 	} else if (strcmp(argv[1], "reload") == 0) {
 		return broker_reload(argc, argv);
 	} else if (strcmp(argv[1], "--help") == 0) {
