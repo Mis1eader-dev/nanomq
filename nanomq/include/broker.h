@@ -82,6 +82,7 @@ typedef struct client_ctx client_ctx;
 
 extern void broker_set_sub_cb(void (*cb)(const char* topic));
 extern void broker_set_unsub_cb(void (*cb)(const char* topic));
+extern void broker_set_unsub_cb2(void (*cb)());
 
 extern int  broker_start(int argc, char **argv, bool hold);
 extern int  broker_stop(int argc, char **argv);

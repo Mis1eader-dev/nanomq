@@ -277,6 +277,7 @@ bridge_handler(nano_work *work)
 
 void (*sub_cb)(const char* topic);
 void (*unsub_cb)(const char* topic);
+void (*unsub_cb2)();
 
 void
 server_cb(void *arg)
@@ -570,6 +571,7 @@ server_cb(void *arg)
 		}
 		work->state = WAIT;
 		nng_aio_finish(work->aio, 0);
+		unsub_cb2();
 		break;
 	case WAIT:
 		// do not access to cparam
@@ -1752,6 +1754,12 @@ void
 broker_set_unsub_cb(void (*cb)(const char* topic))
 {
 	unsub_cb = cb;
+}
+
+void
+broker_set_unsub_cb2(void (*cb)())
+{
+	unsub_cb2 = cb;
 }
 
 int
