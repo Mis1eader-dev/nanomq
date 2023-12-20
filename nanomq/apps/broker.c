@@ -2024,7 +2024,7 @@ broker_restart(int argc, char **argv, bool hold)
 #else
 
 int
-broker_restart(int argc, char **argv)
+broker_restart(int argc, char **argv, bool hold)
 {
 	log_error("Not support on Windows or App lib\n");
 	exit(EXIT_SUCCESS);
