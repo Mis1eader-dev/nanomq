@@ -917,7 +917,7 @@ get_broker_db(void)
 }
 
 int
-broker(conf *nanomq_conf)
+broker(conf *nanomq_conf, bool hold)
 {
 	int        rv, i;
 	uint64_t   num_work;
@@ -1377,7 +1377,7 @@ broker(conf *nanomq_conf)
 		nng_msleep(6000);
 	}
 #else
-	if (is_testing == false) {
+	if (is_testing == false && hold == true) {
 		for (;;) {
 			nng_msleep(
 			    3600000); // neither pause() nor sleep() portable
@@ -1755,7 +1755,7 @@ broker_set_unsub_cb(void (*cb)(const char* topic))
 }
 
 int
-broker_start(int argc, char **argv)
+broker_start(int argc, char **argv, bool hold)
 {
 	int i, url, temp, rc;
 	int pid = 0;
@@ -1851,13 +1851,13 @@ broker_start(int argc, char **argv)
 	}
 #endif
 
-	rc = broker(nanomq_conf);
+	rc = broker(nanomq_conf, hold);
 
 	return rc == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
 void *
-broker_start_with_conf(void *nmq_conf)
+broker_start_with_conf(void *nmq_conf, bool hold)
 {
 
 	int rc = 0;
@@ -1934,7 +1934,7 @@ broker_start_with_conf(void *nmq_conf)
 #endif
 
 	// TODO: more check for arg nanomq_conf?
-	rc = broker(nanomq_conf);
+	rc = broker(nanomq_conf, hold);
 	
 	broker_start_rc = rc == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 	return NULL;

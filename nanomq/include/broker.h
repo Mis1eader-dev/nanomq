@@ -83,13 +83,13 @@ typedef struct client_ctx client_ctx;
 extern void broker_set_sub_cb(void (*cb)(const char* topic));
 extern void broker_set_unsub_cb(void (*cb)(const char* topic));
 
-extern int  broker_start(int argc, char **argv);
+extern int  broker_start(int argc, char **argv, bool hold);
 extern int  broker_stop(int argc, char **argv);
 extern int  broker_restart(int argc, char **argv);
 extern int  broker_reload(int argc, char **argv);
 extern int  broker_dflt(int argc, char **argv);
 extern void bridge_send_cb(void *arg);
-extern void *broker_start_with_conf(void *nmq_conf);
+extern void *broker_start_with_conf(void *nmq_conf, bool hold);
 
 #ifdef STATISTICS
 extern uint64_t nanomq_get_message_in(void);
