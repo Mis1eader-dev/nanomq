@@ -40,3 +40,6 @@ cmake-build-debug/
 
 # Generate files
 fdb_version.h
+
+# Cache
+.cache/

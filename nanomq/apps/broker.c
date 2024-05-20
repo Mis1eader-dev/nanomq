@@ -411,6 +411,9 @@ server_cb(void *arg)
 			if (0 != (rv = encode_suback_msg(smsg, work)))
 				log_error("error in encode suback: [%d]", rv);
 
+			// TODO: Callback: cb(work->sub_pkt->node->topic.body);
+			printf("Subscribed to '%s'\n", work->sub_pkt->node->topic.body);
+
 			sub_pkt_free(work->sub_pkt);
 			// handle retain (Retain flag handled in npipe)
 			work->msg = NULL;
@@ -1291,7 +1294,7 @@ broker(conf *nanomq_conf)
 		}
 	}
 #endif
-	printf("NanoMQ Broker is started successfully!\n");
+	//printf("NanoMQ Broker is started successfully!\n");
 
 #if defined(ENABLE_NANOMQ_TESTS)
 	bool is_testing = true;

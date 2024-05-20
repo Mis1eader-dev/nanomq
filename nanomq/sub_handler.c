@@ -408,6 +408,9 @@ destroy_sub_client_cb(void *args, char *topic)
 {
 	sub_destroy_info *des = (sub_destroy_info *) args;
 
+	// TODO: Callback: cb(topic);
+	printf("Unsubscribed from '%s'\n", topic);
+
 	dbtree_delete_client(des->db, topic, des->pid);
 
 	return NULL;
